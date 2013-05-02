@@ -1,0 +1,23 @@
+<!doctype html>
+<html ng-app>
+<head>
+  <title>Twitter Search</title>
+  <link rel="stylesheet" href="/components/bootstrap/css/bootstrap.css">
+</head>
+<body>
+  <div class="container" ng-controller="MainCtrl">
+    <h1>Twitter Search</h1>
+    <input type="text" ng-model="query">
+    <button class="btn" ng-click="search(query)">search</button>
+    <h3>Results for: {{query}}</h3>
+    <ul>
+      <li ng-repeat="item in items">{{item.text}}</li>    
+    </ul>
+  </div>
+  <script src="/components/jquery/jquery.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/angular-resource/angular-resource.js"></script>
+  
+  <script src="app.js"></script>
+</body>
+</html>
