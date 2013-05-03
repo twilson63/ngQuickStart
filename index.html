@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ng-quickstart : A QuickStart AngularJS tutorial, it only covers the basics, but should help you get started." />
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#main_content').headsmart()
-      })
-    </script>
-    <title>ng-quickstart by twilson63</title>
+    <title>ng-quickstart</title>
   </head>
 
   <body>
-    <a id="forkme_banner" href="https://github.com/twilson63/ngQuickStart">View on GitHub</a>
-    <div class="shell">
 
-      <header>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <h1>ng-quickstart</h1>
-            <h2>A QuickStart AngularJS tutorial, it only covers the basics, but should help you get started.</h2>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/twilson63/ngQuickStart">View on GitHub</a>
 
-      <section id="downloads">
-        <span class="inner">
-          <a href="https://github.com/twilson63/ngQuickStart/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/twilson63/ngQuickStart/tarball/master" class="tgz"><em>download</em> .TGZ</a>
-        </span>
-      </section>
+          <h1 id="project_title">ng-quickstart</h1>
+          <h2 id="project_tagline">A QuickStart AngularJS tutorial, it only covers the basics, but should help you get started.</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/twilson63/ngQuickStart/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/twilson63/ngQuickStart/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      <span class="banner-fix"></span>
-
-
-      <section id="main_content">
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>ngQuickstart</h1>
 
 <h2>Setup</h2>
@@ -323,7 +308,7 @@ $scope.items variable.</p>
 <div class="highlight"><pre>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q=angularjs&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
       <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">tweets</span><span class="p">;</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
       <span class="p">});</span>
   <span class="p">};</span>
 </pre></div>
@@ -450,18 +435,15 @@ Certainly, you do not have to use these aliases if you do not want to, but it ma
 
 <p>But lets put our controller code in an angularjs module, and define that module as our application.  First, we need to create the module and it is very easy: (replace your app.js with the following:)</p>
 
-<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="s1">'use strict'</span><span class="p">;</span>
-
-  <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'Twitter'</span><span class="p">,</span> <span class="p">[])</span>
-    <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'MainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
-           <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-             <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
-           <span class="p">});</span>
-       <span class="p">};</span>      
-    <span class="p">});</span>
+<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'Twitter'</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'MainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">};</span>      
+<span class="p">});</span>
 </pre></div>
 
 <p>You can see we are calling the module method from the angular object and passing the name of our application and an empty array, which will address later.  This method returns a module instance, this instance has a controller method that allows us to define the controller.  We are using chaining to call the controller method.</p>
@@ -484,7 +466,7 @@ Certainly, you do not have to use these aliases if you do not want to, but it ma
 <p>index.html</p>
 
 <div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">ng-app=</span><span class="s">'Twitter'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
   <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
@@ -496,33 +478,30 @@ Certainly, you do not have to use these aliases if you do not want to, but it ma
     <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">ng-click=</span><span class="s">"search(query)"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
     <span class="nt">&lt;h3&gt;</span>Results for: {{query}}<span class="nt">&lt;/h3&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>{{item.text}}<span class="nt">&lt;/li&gt;</span>    
+      <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>
+        {{item.text}}
+      <span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </pre></div>
 
 <p>app.js</p>
 
-<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="s1">'use strict'</span><span class="p">;</span>
-
-  <span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
-      <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
-      <span class="p">});</span>
-  <span class="p">};</span>
-
-  <span class="p">};</span>  
-<span class="p">})();</span>
+<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'Twitter'</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'MainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">};</span>      
+<span class="p">});</span>
 </pre></div>
 
 <p><a name="jshint"></a></p>
@@ -541,21 +520,17 @@ Certainly, you do not have to use these aliases if you do not want to, but it ma
 <div class="highlight"><pre>jshint <span class="o">[</span>your js file<span class="o">]</span>
 </pre></div>
       </section>
+    </div>
 
-      <footer>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/twilson63">twilson63</a> can be found on <a href="https://github.com/twilson63/ngQuickStart">GitHub</a></p>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
-        <span class="octocat"></span>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ng-quickstart maintained by <a href="https://github.com/twilson63">twilson63</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
-
     </div>
 
     
+
   </body>
 </html>
