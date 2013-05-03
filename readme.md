@@ -55,21 +55,22 @@ html>head>title{Twitter Search}+link[href="/components/bootstrap/css/bootstrap.c
 
 In this exercise, we want to do a simple binding test to confirm we have angularjs configured correctly.
 
-In the body of your html document add the following after the `<button>` tag:
+In the body of your html document, add the following html after the `<button>` tag:
   
 ``` html
 <h3>Results for: <span ng-bind="query"></span></h3>
 ```
 
-Next, lets add an angular ng-model attribute assigned to the string "hello" to the input element, like this:
+Next, lets add an angular `ng-model` attribute to the `input` element and assign the string "query", like this:
 
 ``` html
 <input type="text" ng-model="query">
 ```
 
-Lastly, we need to initialize our angularjs app, lets do it manually.
+Lastly, we need to bootstrap our angularjs app, lets use the manual method.
 
-After the last script element, lets create another script element:
+To manually bootstrap an AngularJS app we need to create a `<script>` element after the last script element, 
+or just before the `</body>` element.
 
 ``` html
 <script>
@@ -112,13 +113,26 @@ Here is a full view of your html file.
 
 Open up a browser and confirm you have the data-binding working by typing in the input box.
 
-Did you get it working?  If so?  GREAT JOB!, if not look for syntax errors you may want to install [jshint](#jshint) and see if you have any syntax errors 
+Did you get it working?  If so?  GREAT JOB!, if not look for syntax errors. 
 
-The view layer of Angular is made up of HTML Templates and directives, angular is like an html compiler, it will compile the html and execute any directives on the html.  In the above example, we added two directives (ng-model, ng-bind).
+You may want to install [jshint](#jshint) and see if you have any syntax errors. 
+
+The view layer of Angular is made up of `HTML Templates` and `directives`, angular 
+is like an html compiler, it will compile the html and execute any directives.  
+In the above example, we added two directives (ng-model, ng-bind).
 
 ## Exercise 2 - Working with directives
 
-As we demonstrated above, we are using the actual html file as our dynamic template, there is no need for haml, ejb, dust, or mustache.  AngularJS uses the html markup in a declarative way to build your views.  As with all templates we need a way to map data to the view template.  AngularJS uses attributes on the html element which are called directives.  Actually, a directive may be an actual element, class or attribute.  For now, we will stick to attributes.
+As we demonstrated above, we are using the actual html file as our dynamic template, 
+there is no need for haml, ejb, dust, or mustache.  
+AngularJS uses the html markup in a declarative way to build and render your views.  
+As with all templates, we need a way to map data to the view template.  
+
+AngularJS uses attributes on the html element which are called directives.  
+
+> Actually, a directive may be an actual `element`, `class name` or `attribute`.  
+
+For now, we will stick to attributes.
 
 In this exercise, we will use the `ng-repeat` directive to display a list of results. 
 
@@ -129,24 +143,28 @@ On the `<li>` element lets add an attribute called `ng-repeat` like so:
   <span ng-bind="item"></span>
 </li>
 ```
-Now lets view the result in the browser:
 
-You should see four line items, if so GREAT JOB!
+Lets view the result in the browser:
 
-The ng-repeat directive is one of the most powerful and we will use it in all of our exercises today.
+``` sh
+open index.html
+```
 
-# Exercise 3 - Controllers -> Now, lets write some code.
+You should see four line items, GREAT JOB!
 
-* create a file in the same directory as index.html called app.js
-* add the following script element just before the `</body>` tag:
+The ng-repeat directive is one of the most powerful built-in directives in Angular,
+and we will use it in all of our exercises.
+
+# Exercise 3 - Controllers 
+
+create a file in the tsearch directory called app.js,
+add the following script element just before the `</body>` tag:
 
 ``` html
 <script src="app.js"></script>
 ```
 
-Next, open `app.js` in your editor.
-
-Let's add the following function to the `app.js` file:
+Next, open `app.js` in your editor and add the following function to the `app.js` file:
 
 ``` js
 (function() {
@@ -159,7 +177,7 @@ Let's add the following function to the `app.js` file:
 })();
 ```
 
-and modify the ng-repeat directive to loop through items on index.html.
+modify the ng-repeat directive to loop through items on index.html.
 
 ``` html
 <li ng-repeat="item in items">
@@ -171,7 +189,10 @@ lastly we need to create a controller directive on the container div:
 <div class="container" ng-controller="MainCtrl">
 ```
 
-And reload your browser, you should see a list of items with each line spelled out.  one, two, three, four, if so - GREAT JOB!
+And reload your browser, you should see a list of items with each line spelled out.  
+one, two, three, four
+
+> GREAT JOB!
 
 If not compare your code to the following:
 
@@ -219,23 +240,40 @@ If not compare your code to the following:
 ```
 
 
-Ok, so lets break down what we did here.  We created a global function called `MainCtrl`, and on the argument list we added an argument called $scope.  You may be wondering where this object is coming from and with good reason, which we will get to shortly.  Continuing on in the MainCtrl function, you see that we are assigning an array to a key on the $scope object called `items`.  
+Ok, so lets break down what we did here.  
+
+We created a global function called `MainCtrl`, and on the argument list we added an argument called $scope.  
+You may be wondering where this object is coming from and with good reason, we will get to that shortly.  
+
+Continuing on in the MainCtrl function, you see that we are assigning an array to a key on the $scope object 
+called `items`.  
 
 Moving over the `index.html` file, we modified the ng-repeat directive to get its repeater source from the items key.  This is the `model` that we attached to the `$scope` object in our function.  And the last piece of the puzzle is the controller.  We modified the `div.container` with a new attribute called ng-controller and assigned it to the "MainCtrl" function.  The declaration basically creates and assigns a $scope object for all of the directives enclosed in this div to work with.  This is how AngularJS's views consume `model` data.  So you may start to think `MVC`.  
 
-So back to the magic, when a ng-controller is created AngularJS creates a $scope `service` or `object` for the directives enclosed in the controller template.  When we defined our function, we added the `$scope` (service or object) to our list of arguments.  The act of doing this communicated to AngularJS to inject the controllers `$scope` into our controller function.  
+So back to the *magic*, when a ng-controller is created AngularJS creates a `service` or `object` called `$scope` 
+for the directives enclosed in the controller template.  Which is all the directives defined inside the 
+`<div class="container" ng-controller="MainCtrl">`
+
+When we defined our function, we added the `$scope` (service or object) to our list of arguments.  
+The act of adding this argument communicated to AngularJS to inject the controller's `$scope` object 
+into our controller function MainCtrl.  This is called: 
 
 ## Dependency Injection
 
-AngularJS has a feature called Dependency Injection, which basically means that you can ask the angular application to inject or place objects in your functions when you need them.  The most common one is `$scope`.
+Which basically means that you can ask the angular application 
+to inject or place objects in your functions when you need them.  
+The most common object you inject in your controllers is `$scope`.
 
-Hopefully, you can get a solid sense on how we are wiring our Views (HTML Templates) to our controllers (Javascript Functions) to our models (simple array).
+Hopefully, you can get a solid sense on how we are wiring our Views (HTML Templates) to our controllers (Javascript 
+Functions) to our models (simple array).
 
 ## Exercise 4 - Ajax Service
 
-So we have a controller with a simple input form and button and results list.  We now need to take the text from the input and make a request to twitter.  Twitter will send us some results back and we want to display them in our list.
+So we have a controller with a simple input form and button and results list.  We now need to take the text from the 
+input and make a request to twitter.  Twitter will send us some results back and we want to display them in our list.
 
-First, we need to open our `app.js` file and add a new argument in our MainCtrl function.  We want to ask angular to inject the `$http` service into our controller.  
+First, we need to open our `app.js` file and add a new argument in our MainCtrl function.  We want to ask angular 
+to inject the `$http` service into our controller.  
 
 ``` js
 window.MainCtrl = function ($scope, $http) {
@@ -243,7 +281,9 @@ window.MainCtrl = function ($scope, $http) {
 };
 ```
 
-And now we want to rewrite the function body to capture a search event and assign it to a function that will call `http://search.twitter.com/search.json?q=angularjs&callback=JSON_CALLBACK` and assign the results into the $scope.items variable.
+And now we want to rewrite the function body to capture a search event and assign it to a function that will call 
+`http://search.twitter.com/search.json?q=angularjs&callback=JSON_CALLBACK` and assign the results into the 
+$scope.items variable.
 
 ``` js
   $scope.search = function(query) {
@@ -254,13 +294,15 @@ And now we want to rewrite the function body to capture a search event and assig
   };
 ```
 
-Now, we need to wire the `$scope.search` function to our view (HTML Template).  All we have to do is add a `ng-click` directive to the `button` element.
+Now, we need to wire up the `$scope.search` function to our view (HTML Template).  
+All we have to do is add a `ng-click` directive to the `button` element.
 
 ``` html
 <button class="btn" ng-click="search(query)">search</button>
 ```
 
-And we have to modify our `ng-bind` attribute in the `span` element enclosed in the `li` element to display the text from each tweet.
+And we have to modify our `ng-bind` attribute in the `span` element enclosed in the `li` element 
+to display the text from each tweet.
 
 ``` html
 <span ng-bind="item.text"></span>
@@ -268,17 +310,24 @@ And we have to modify our `ng-bind` attribute in the `span` element enclosed in 
 
 Let's refresh our browser and click the search button, you should see some real live tweet results.
 
-Almost there, we still have one issue remaining.  We need to take the user entered text in the input element and use it to request a search from twitter.  Everything is ready to go, all we need to do is modify our http url string to use basic string concatenation to include the query text.
+> GREAT JOB!
+
+Almost there, we still have one issue remaining.  
+
+We need to take the user entered text in the input element and use it to request a search from twitter.  
+Everything is ready to go, all we need to do is modify our http url string to use basic string concatenation 
+to include the query text.
 
 ``` js
 $http.jsonp('http://search.twitter.com/search.json?q=' + query + '&callback=JSON_CALLBACK')
 ```
 
-GREAT JOB, we now have a very simple twitter search app using angularjs.
+> GREAT JOB, we now have a very simple twitter search app using angularjs.
 
 # Exercise 5 - Using some sugar in the html template.
 
-So there are a couple of directives that have some sugar to make things a little bit easier on the eyes.  Certainly, you do not have to use these aliases if you do not want to, but it may save you some time.
+So there are a couple of directives that have some sugar to make things a little bit easier on the eyes. 
+Certainly, you do not have to use these aliases if you do not want to, but it may save you some time.
 
 First, the bootstrap method:
 
