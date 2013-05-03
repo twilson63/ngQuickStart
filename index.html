@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>ng-quickstart by twilson63</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/twilson63/ngQuickStart">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>ng-quickstart</h1>
+            <h2>A QuickStart AngularJS tutorial, it only covers the basics, but should help you get started.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/twilson63/ngQuickStart/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/twilson63/ngQuickStart/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>ngQuickstart</h1>
+
+<h2>Setup</h2>
+
+<ul>
+<li>Install brackets (<a href="http://brackets.io/">http://brackets.io/</a>)</li>
+<li>Install Emmet Extension (<a href="https://github.com/emmetio/emmet/downloads">https://github.com/emmetio/emmet/downloads</a>)</li>
+<li>Install Nodejs (<a href="http://nodejs.org">http://nodejs.org</a>)</li>
+<li>Open console</li>
+</ul><div class="highlight"><pre>mkdir tsearch
+<span class="nb">cd </span>tsearch
+npm install bower -g
+bower init
+bower install jquery bootstrap.css angular-resource --save
+touch index.html
+</pre></div>
+
+<ul>
+<li>Open Brackets or your favorite editor</li>
+<li>Open the index.html file and paste the snippet below</li>
+</ul><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Twitter Search<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+html&gt;head&gt;title{Twitter Search}+link[href="/components/bootstrap/css/bootstrap.css"]^body&gt;.container&gt;h1{Twitter Search}+input+button.btn{search}+ul&gt;li^^script[src="/components/jquery/jquery.js"]+script[src="/components/angular/angular.js"]+script[src="/components/angular-resource/angular-resource.js"]
+</pre></div>
+
+<ul>
+<li>And press tab to invoke emmet</li>
+</ul><h2>Exercise 1 - Simple Binding Test</h2>
+
+<p>In this exercise, we want to do a simple binding test to confirm we have angularjs configured correctly.</p>
+
+<p>In the body of your html document, add the following html after the <code>&lt;button&gt;</code> tag:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;h3&gt;</span>Results for: <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"query"</span><span class="nt">&gt;&lt;/span&gt;&lt;/h3&gt;</span>
+</pre></div>
+
+<p>Next, lets add an angular <code>ng-model</code> attribute to the <code>input</code> element and assign the string "query", like this:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Lastly, we need to bootstrap our angularjs app, lets use the manual method.</p>
+
+<p>To manually bootstrap an AngularJS app we need to create a <code>&lt;script&gt;</code> element after the last script element, 
+or just before the <code>&lt;/body&gt;</code> element.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script&gt;</span>
+  <span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">angular</span><span class="p">.</span><span class="nx">bootstrap</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<p>Here is a full view of your html file.</p>
+
+<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Twitter Search<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Results for: <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"query"</span><span class="nt">&gt;&lt;/span&gt;&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">angular</span><span class="p">.</span><span class="nx">bootstrap</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>Open up a browser and confirm you have the data-binding working by typing in the input box.</p>
+
+<p>Did you get it working?  If so?  GREAT JOB!, if not look for syntax errors. </p>
+
+<p>You may want to install <a href="#jshint">jshint</a> and see if you have any syntax errors. </p>
+
+<p>The view layer of Angular is made up of <code>HTML Templates</code> and <code>directives</code>, angular 
+is like an html compiler, it will compile the html and execute any directives.<br>
+In the above example, we added two directives (ng-model, ng-bind).</p>
+
+<h2>Exercise 2 - Working with directives</h2>
+
+<p>As we demonstrated above, we are using the actual html file as our dynamic template, 
+there is no need for haml, ejb, dust, or mustache.<br>
+AngularJS uses the html markup in a declarative way to build and render your views.<br>
+As with all templates, we need a way to map data to the view template.  </p>
+
+<p>AngularJS uses attributes on the html element which are called directives.  </p>
+
+<blockquote>
+<p>Actually, a directive may be an actual <code>element</code>, <code>class name</code> or <code>attribute</code>.  </p>
+</blockquote>
+
+<p>For now, we will stick to attributes.</p>
+
+<p>In this exercise, we will use the <code>ng-repeat</code> directive to display a list of results. </p>
+
+<p>On the <code>&lt;li&gt;</code> element lets add an attribute called <code>ng-repeat</code> like so:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in [1, 2, 3, 4]"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"item"</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+<p>Lets view the result in the browser:</p>
+
+<div class="highlight"><pre>open index.html
+</pre></div>
+
+<p>You should see four line items, GREAT JOB!</p>
+
+<p>The ng-repeat directive is one of the most powerful built-in directives in Angular,
+and we will use it in all of our exercises.</p>
+
+<h1>Exercise 3 - Controllers</h1>
+
+<p>create a file in the tsearch directory called app.js,
+add the following script element just before the <code>&lt;/body&gt;</code> tag:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>Next, open <code>app.js</code> in your editor and add the following function to the <code>app.js</code> file:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s1">'use strict'</span><span class="p">;</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">];</span>
+  <span class="p">};</span>
+
+<span class="p">})();</span>
+</pre></div>
+
+<p>modify the ng-repeat directive to loop through items on index.html.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>lastly we need to create a controller directive on the container div:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span> <span class="na">ng-controller=</span><span class="s">"MainCtrl"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>And reload your browser, you should see a list of items with each line spelled out.<br>
+one, two, three, four</p>
+
+<blockquote>
+<p>GREAT JOB!</p>
+</blockquote>
+
+<p>If not compare your code to the following:</p>
+
+<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span> <span class="na">ng-controller=</span><span class="s">"MainCtrl"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Twitter Search<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Results for: <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"query"</span><span class="nt">&gt;&lt;/span&gt;&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"item"</span><span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>    
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">angular</span><span class="p">.</span><span class="nx">bootstrap</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s1">'use strict'</span><span class="p">;</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">];</span>
+  <span class="p">};</span>
+
+<span class="p">})();</span>
+</pre></div>
+
+<p>Ok, so lets break down what we did here.  </p>
+
+<p>We created a global function called <code>MainCtrl</code>, and on the argument list we added an argument called $scope.<br>
+You may be wondering where this object is coming from and with good reason, we will get to that shortly.  </p>
+
+<p>Continuing on in the MainCtrl function, you see that we are assigning an array to a key on the $scope object 
+called <code>items</code>.  </p>
+
+<p>Moving over the <code>index.html</code> file, we modified the ng-repeat directive to get its repeater source from the items key.  This is the <code>model</code> that we attached to the <code>$scope</code> object in our function.  And the last piece of the puzzle is the controller.  We modified the <code>div.container</code> with a new attribute called ng-controller and assigned it to the "MainCtrl" function.  The declaration basically creates and assigns a $scope object for all of the directives enclosed in this div to work with.  This is how AngularJS's views consume <code>model</code> data.  So you may start to think <code>MVC</code>.  </p>
+
+<p>So back to the <em>magic</em>, when a ng-controller is created AngularJS creates a <code>service</code> or <code>object</code> called <code>$scope</code> 
+for the directives enclosed in the controller template.  Which is all the directives defined inside the 
+<code>&lt;div class="container" ng-controller="MainCtrl"&gt;</code></p>
+
+<p>When we defined our function, we added the <code>$scope</code> (service or object) to our list of arguments.<br>
+The act of adding this argument communicated to AngularJS to inject the controller's <code>$scope</code> object 
+into our controller function MainCtrl.  This is called: </p>
+
+<h2>Dependency Injection</h2>
+
+<p>Which basically means that you can ask the angular application 
+to inject or place objects in your functions when you need them.<br>
+The most common object you inject in your controllers is <code>$scope</code>.</p>
+
+<p>Hopefully, you can get a solid sense on how we are wiring our Views (HTML Templates) to our controllers (Javascript 
+Functions) to our models (simple array).</p>
+
+<h2>Exercise 4 - Ajax Service</h2>
+
+<p>So we have a controller with a simple input form and button and results list.  We now need to take the text from the 
+input and make a request to twitter.  Twitter will send us some results back and we want to display them in our list.</p>
+
+<p>First, we need to open our <code>app.js</code> file and add a new argument in our MainCtrl function.  We want to ask angular 
+to inject the <code>$http</code> service into our controller.  </p>
+
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">]</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>And now we want to rewrite the function body to capture a search event and assign it to a function that will call 
+<code>http://search.twitter.com/search.json?q=angularjs&amp;callback=JSON_CALLBACK</code> and assign the results into the 
+$scope.items variable.</p>
+
+<div class="highlight"><pre>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q=angularjs&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">tweets</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">};</span>
+</pre></div>
+
+<p>Now, we need to wire up the <code>$scope.search</code> function to our view (HTML Template).<br>
+All we have to do is add a <code>ng-click</code> directive to the <code>button</code> element.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">ng-click=</span><span class="s">"search(query)"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+
+<p>And we have to modify our <code>ng-bind</code> attribute in the <code>span</code> element enclosed in the <code>li</code> element 
+to display the text from each tweet.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"item.text"</span><span class="nt">&gt;&lt;/span&gt;</span>
+</pre></div>
+
+<p>Let's refresh our browser and click the search button, you should see some real live tweet results.</p>
+
+<blockquote>
+<p>GREAT JOB!</p>
+</blockquote>
+
+<p>Almost there, we still have one issue remaining.  </p>
+
+<p>We need to take the user entered text in the input element and use it to request a search from twitter.<br>
+Everything is ready to go, all we need to do is modify our http url string to use basic string concatenation 
+to include the query text.</p>
+
+<div class="highlight"><pre><span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p>GREAT JOB, we now have a very simple twitter search app using angularjs.</p>
+</blockquote>
+
+<h1>Exercise 5 - Using some sugar in the html template.</h1>
+
+<p>So there are a couple of directives that have some sugar to make things a little bit easier on the eyes. 
+Certainly, you do not have to use these aliases if you do not want to, but it may save you some time.</p>
+
+<p>First, the bootstrap method:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script&gt;</span>
+  <span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">angular</span><span class="p">.</span><span class="nx">bootstrap</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<p>Can be replaced by just adding <code>ng-app</code> to the body or html element.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Second, is to replace ng-bind with the {{model}} symbols.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;h3&gt;</span>Results for: <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"query"</span><span class="nt">&gt;&lt;/span&gt;&lt;/h3&gt;</span>
+</pre></div>
+
+<p>Can be replaced with</p>
+
+<div class="highlight"><pre><span class="nt">&lt;h3&gt;</span>Results for: {{query}}<span class="nt">&lt;/h3&gt;</span>
+</pre></div>
+
+<p>and</p>
+
+<div class="highlight"><pre> <span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">"item.text"</span><span class="nt">&gt;&lt;/span&gt;</span>
+</pre></div>
+
+<p>Can be replaced with</p>
+
+<div class="highlight"><pre>  {{item.text}}
+</pre></div>
+
+<h1>What we have so far</h1>
+
+<p>index.html</p>
+
+<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span> <span class="na">ng-controller=</span><span class="s">"MainCtrl"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Twitter Search<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">ng-click=</span><span class="s">"search(query)"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Results for: {{query}}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>{{item.text}}<span class="nt">&lt;/li&gt;</span>    
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>app.js</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s1">'use strict'</span><span class="p">;</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> 
+        <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+  <span class="p">};</span>  
+<span class="p">})();</span>
+</pre></div>
+
+<h2>Exercise 6 - Place the controller into an angularjs module.</h2>
+
+<p>Now you might be thinking, ok this is a great demo, but creating global functions is not a best practice and certainly can create some potential issues.  And your right, we have been using the global to not throw too much at you at once and hopefully help you get an idea of what is going on behind the scenes on how the views connect to controllers and models.</p>
+
+<p>But lets put our controller code in an angularjs module, and define that module as our application.  First, we need to create the module and it is very easy: (replace your app.js with the following:)</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s1">'use strict'</span><span class="p">;</span>
+
+  <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'Twitter'</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'MainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+           <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+             <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
+           <span class="p">});</span>
+       <span class="p">};</span>      
+    <span class="p">});</span>
+</pre></div>
+
+<p>You can see we are calling the module method from the angular object and passing the name of our application and an empty array, which will address later.  This method returns a module instance, this instance has a controller method that allows us to define the controller.  We are using chaining to call the controller method.</p>
+
+<p>Then we simply call the controller the same name as our declaration and add our function to the angular module.</p>
+
+<p>Great!</p>
+
+<p>Now, we need to go to the html index.html file and assign our newly created module to our <code>ng-app</code> directive.  Like so:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">ng-app=</span><span class="s">"Twitter"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Awesome!  We have just removed all the ugly global function stuff, and your code is now safely wrapped in an angular module.</p>
+
+<p>GREAT JOB!</p>
+
+<p>Here is the final results:</p>
+
+<p>index.html</p>
+
+<div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Twitter Search<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/components/bootstrap/css/bootstrap.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span> <span class="na">ng-controller=</span><span class="s">"MainCtrl"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Twitter Search<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">ng-click=</span><span class="s">"search(query)"</span><span class="nt">&gt;</span>search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Results for: {{query}}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>{{item.text}}<span class="nt">&lt;/li&gt;</span>    
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/components/angular-resource/angular-resource.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>app.js</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s1">'use strict'</span><span class="p">;</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">MainCtrl</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$http</span><span class="p">.</span><span class="nx">jsonp</span><span class="p">(</span><span class="s1">'http://search.twitter.com/search.json?q='</span> <span class="o">+</span> <span class="nx">query</span> <span class="o">+</span> <span class="s1">'&amp;callback=JSON_CALLBACK'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="p">};</span>  
+<span class="p">})();</span>
+</pre></div>
+
+<p><a name="jshint"></a></p>
+
+<h1>Using jsHint</h1>
+
+<p>jsHint is a linting tool that will scan your javascript file and let you know if you have any syntax errors.</p>
+
+<h2>install</h2>
+
+<div class="highlight"><pre>npm install jshint -g
+</pre></div>
+
+<h2>run</h2>
+
+<div class="highlight"><pre>jshint <span class="o">[</span>your js file<span class="o">]</span>
+</pre></div>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/twilson63">twilson63</a> can be found on <a href="https://github.com/twilson63/ngQuickStart">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
