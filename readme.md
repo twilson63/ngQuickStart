@@ -289,7 +289,7 @@ $scope.items variable.
   $scope.search = function(query) {
     $http.jsonp('http://search.twitter.com/search.json?q=angularjs&callback=JSON_CALLBACK')
       .success(function(data) {
-        $scope.items = data.tweets;
+        $scope.items = data.results;
       });
   };
 ```
