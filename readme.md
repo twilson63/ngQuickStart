@@ -289,7 +289,7 @@ $scope.items variable.
   $scope.search = function(query) {
     $http.jsonp('http://search.twitter.com/search.json?q=angularjs&callback=JSON_CALLBACK')
       .success(function(data) {
-        $scope.items = data.tweets;
+        $scope.items = data.results;
       });
   };
 ```
@@ -423,19 +423,16 @@ Now you might be thinking, ok this is a great demo, but creating global function
 
 But lets put our controller code in an angularjs module, and define that module as our application.  First, we need to create the module and it is very easy: (replace your app.js with the following:)
 
-``` js
-(function() {
-  'use strict';
-  
-  angular.module('Twitter', [])
-    .controller('MainCtrl', function($scope, $http) {
-      $scope.search = function(query) {
-         $http.jsonp('http://search.twitter.com/search.json?q=' + query + '&callback=JSON_CALLBACK')
-           .success(function(data) {
-             $scope.items = data.results;
-           });
-       };      
-    });
+``` js  
+angular.module('Twitter', [])
+  .controller('MainCtrl', function($scope, $http) {
+    $scope.search = function(query) {
+      $http.jsonp('http://search.twitter.com/search.json?q=' + query + '&callback=JSON_CALLBACK')
+        .success(function(data) {
+          $scope.items = data.results;
+        });
+    };      
+});
 ```
 
 You can see we are calling the module method from the angular object and passing the name of our application and an empty array, which will address later.  This method returns a module instance, this instance has a controller method that allows us to define the controller.  We are using chaining to call the controller method.
@@ -460,7 +457,7 @@ index.html
 
 ``` html
 <!doctype html>
-<html ng-app>
+<html ng-app='Twitter'>
 <head>
   <title>Twitter Search</title>
   <link rel="stylesheet" href="/components/bootstrap/css/bootstrap.css">
@@ -472,14 +469,15 @@ index.html
     <button class="btn" ng-click="search(query)">search</button>
     <h3>Results for: {{query}}</h3>
     <ul>
-      <li ng-repeat="item in items">{{item.text}}</li>    
+      <li ng-repeat="item in items">
+        {{item.text}}
+      </li>
     </ul>
   </div>
   <script src="/components/jquery/jquery.js"></script>
   <script src="/components/angular/angular.js"></script>
   <script src="/components/angular-resource/angular-resource.js"></script>
-  
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
 ```
@@ -487,19 +485,15 @@ index.html
 app.js
 
 ``` js
-(function() {
-  'use strict';
-
-  window.MainCtrl = function ($scope, $http) {
-      $scope.search = function(query) {
-    $http.jsonp('http://search.twitter.com/search.json?q=' + query + '&callback=JSON_CALLBACK')
-      .success(function(data) {
-        $scope.items = data.results;
-      });
-  };
-
-  };  
-})();
+angular.module('Twitter', [])
+  .controller('MainCtrl', function($scope, $http) {
+    $scope.search = function(query) {
+      $http.jsonp('http://search.twitter.com/search.json?q=' + query + '&callback=JSON_CALLBACK')
+        .success(function(data) {
+          $scope.items = data.results;
+        });
+    };      
+});
 ``` 
 
 
