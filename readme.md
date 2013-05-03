@@ -1,4 +1,4 @@
-# ngQuickstart (with brackets)
+# ngQuickstart 
 
 ## Setup
 
