@@ -14,6 +14,7 @@ npm install bower -g
 bower init
 bower install jquery bootstrap.css angular-resource --save
 touch index.html
+npm install w3 -g
 ```
 
 * Open Brackets or your favorite editor
